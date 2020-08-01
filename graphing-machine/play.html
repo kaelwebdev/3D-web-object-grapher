@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, width=device-width"><!--, user-scalable=no">-->
+
+	<title>Graphing machine with light</title>
+	<meta name="description" content="Proyecto corte 2 Compugráfica">
+	<meta name="author" content="k">
+	<link rel="stylesheet" href="./style/style.css">
+	
+	<!-- jquery-3.1.0.min.js v3.1.0 -->
+	<!-- ./js/libs/jquery-3.1.0.min.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+	<!-- three.js r66-->
+	<!-- ./js/libs/three.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r66/three.min.js"></script>
+
+	<!-- OrbitControls.js v?-->
+	<!-- ./js/libs/OrbitControls.js -->
+	<script src="./js/libs/OrbitControls.js"></script>
+
+	<!-- Stats.js v? -->
+	<!-- https://github.com/mrdoob/stats.js -->
+	<!-- <script src="./js/libs/Stats.js"></script> -->
+
+	<!-- threex.dynamictexture.js v? -->
+	<!-- https://github.com/jeromeetienne/threex.dynamictexture/blob/master/threex.dynamictexture.js -->
+	<!-- <script src="./js/libs/threex.dynamictexture.js"></script> -->
+
+ 	<script src="./js/recursos.js"></script>
+ 	<script src="./js/libs/GeometryExporter.js"></script>
+ </head>
+ <body>
+ 	<div id="info"></div>
+
+ 	<div id="commandPanel">
+
+ 		<div class="section">
+ 			<select class="elmts" name="elementos" id="elementos">   
+        	 </select>
+ 				<div class="title">»Apariencia</div>
+ 				<div class="sContent">
+ 					<div class="actns">
+ 						<p class="stitle">Color</p>
+ 					</div>
+		 				<div class="lista2">
+		 				R<input class="listaDentro" type="text" id="rojo" value="255"/><br>
+		 				G<input class="listaDentro" type="text" id="verde" value="0"/><br>
+		 				B<input class="listaDentro" type="text" id="azul" value="0"/>
+		 				</div>
+		 				<div class="btn3" data-action="idActual">
+		 					<p class="stitle2" >Pintar</p>
+		 				</div>
+		 				<div class="actns">
+		 					<p class="stitle">Combinar con:</p>
+		 				</div>
+		 				<div class="lista2">
+		 				R<input class="listaDentro" type="text" id="rojo2" value="0"/><br>
+		 				G<input class="listaDentro" type="text" id="verde2" value="255"/><br>
+		 				B<input class="listaDentro" type="text" id="azul2" value="0"/>
+		 				</div>
+		 				<div class="btn4" data-action="idActual">
+		 					<p class="stitle2" >Pintar Mezlca</p>
+		 				</div>
+	 				<div class="actns">
+	 					<p class="stitle">Textura</p>
+	 				</div>
+		 				<div class="lista2">
+		 				<select class="elmts" name="elemTexturas" id="elemTexturas"> 
+		 				<option value= "1" > Chess</option>
+		 				<option value= "2" > crate</option> 
+		 				<option value= "3" > rock</option>  
+		 				</select>
+		 				</div>
+		 				<div class="btn5">
+		 					<p class="stitle2" >Aplicar Textura</p>
+		 				</div>
+		 				<div class="actns">
+		 					<p class="stitle">Tipo Texturizado</p>
+		 				</div>
+		 				<div class="lista2">
+		 				<select class="elmts" name="elemTT" id="elemTT"> 
+		 				<option value= "1" > Clamp</option>
+		 				<option value= "2" > Repeat</option> 
+		 				<option value= "3" > Mirrored Repeat</option>  
+		 				</select>
+		 				<input class="cajabarra" type="text" name="rXbox" id="rXbox" value="4">
+		 				<input class="cajabarra" type="text" name="rYbox" id="rYbox" value="4">
+ 						</div>
+		 				<div class="btn6">
+		 					<p class="stitle2" >Aplicar Texturizado</p>
+		 				</div>
+ 			</div>	
+ 		</div>
+
+ 		<div class="section">
+ 			<div class="title">»Crear Objetos</div>
+ 			<div class="sContent">
+ 				<div class="actns">
+ 					<p class="stitle">Acciones</p>	
+ 				</div>
+ 				<div class="lista">
+ 				<div class="actnBtn" data-action="crearPlano">Crear Plano</div>
+ 				<div class="actnBtn" data-action="crearCubo">Crear Cubo</div>
+ 				<div class="actnBtn" data-action="crearCilindro">Crear Cilindro</div>
+ 				<div class="actnBtn" data-action="crearEsfera">Crear Esfera</div>
+ 				<div class="actnBtn" data-action="crearIcosaedro">Crear Icosaedro</div>
+ 				<div class="actnBtn" data-action="crearTorus">Crear Torus</div>
+ 				</div>
+
+ 				<div class="objs">
+ 					<p class="stitle">Objetos</p>
+ 				</div>
+ 				<div class="lista">
+ 				</div>
+ 			</div>
+ 		</div>
+
+
+ 		<div class="section">
+ 			<div class="title">»Transformaciones</div>
+ 			<div class="sContent">
+ 				<div class="actns">
+ 					<p class="stitle">Acciones</p>
+ 				</div>
+ 				<div class="lista">
+ 				<div class="actnBtn2" data-action="mover" >Mover</div>
+ 				<div style="margin-left: 1">		
+ 				<div class="barra" style="text-align: center;">x<input class="barraDentro" id="xposition" type="range" name="xposition" min="-100" max="100" step="1" value="1"><input class="cajabarra" type="text" name="valorxp" id="valorxp" value=""></div>
+ 				<div class="barra">y<input class="barraDentro" id="yposition" type="range" name="yposition" min="-100" max="100" step="1" value="1"><input class="cajabarra" type="text" name="valoryp" id="valoryp" value=""></div>
+ 				<div class="barra">z<input class="barraDentro" id="zposition" type="range" name="zposition" min="-100" max="100" step="1" value="1"><input class="cajabarra" type="text" name="valorzp" id="valorzp" value=""></div>
+ 				</div>
+ 				<div class="actnBtn2" data-action="girar">Girar</div>
+ 				<div class="barra">x<input class="barraDentro" id="xgyre" type="range" name="xgyre" min="-360" max="360" step="1" value="1"><input class="cajabarra" type="text" name="valorxg" id="valorxg" value=""></div>
+ 				<div class="barra">y<input class="barraDentro" id="ygyre" type="range" name="ygyre" min="-360" max="360" step="1" value="1"><input class="cajabarra" type="text" name="valoryg" id="valoryg" value=""></div>
+ 				<div class="barra">y<input class="barraDentro" id="zgyre" type="range" name="zgyre" min="-360" max="360" step="1" value="1"><input class="cajabarra" type="text" name="valorzg" id="valorzg" value=""></div>
+ 				<div class="actnBtn2" data-action="escalar">Escalar</div>
+ 				<div class="barra">x<input class="barraDentro" id="xscale" type="range" name="xscale" min="1" max="10" step="1" value="1"><input class="cajabarra" type="text" name="valorxe" id="valorxe" value=""></div>
+ 				<div class="barra">y<input class="barraDentro" id="yscale" type="range" name="yscale" min="1" max="10" step="1" value="1"><input class="cajabarra" type="text" name="valorye" id="valorye" value=""></div>
+ 				<div class="barra">z<input class="barraDentro" id="zscale" type="range" name="zscale" min="1" max="10" step="1" value="1"><input class="cajabarra" type="text" name="valorze" id="valorze" value=""></div>
+
+ 				</div>
+ 				
+ 			</div>
+ 		</div>
+
+
+ 		<div class="section">
+ 			<div class="title">»Luz</div>
+ 			<div class="sContent">
+ 				<div class="actns">
+ 					<p class="stitle">Modiificar</p>
+ 				</div>
+ 				<div class="lista">
+ 				<div class="actnBtn2" data-action="" >Intencidad</div>
+ 				<div style="margin-left: 1">		
+				 <div class="barra" style="text-align: center;">0<input class="barraDentro" id="lIntencidadBarra" type="range" name="lIntencidadBarra" min="0" max="1" step="0.05" value="0">
+					<input class="cajabarra" type="text" name="lIntencidadbox" id="lIntencidadbox" value="0"></div>
+ 				</div>
+ 				<div class="actnBtn2" data-action="">Color</div>
+ 				<div class="barra">R<input class="barraDentro" id="lcolorRbarra" type="range" name="lcolorRbarra" min="0" max="255" step="1" value="0">
+ 				<input class="cajabarra" type="text" name="lcolorGbox" id="lcolorRbox" value="255">
+ 				</div>
+ 				<div class="barra">G<input class="barraDentro" id="lcolorGbarra" type="range" name="lcolorGbarra" min="0" max="255" step="1" value="0">
+ 				<input class="cajabarra" type="text" name="lcolorGbox" id="lcolorGbox" value="0">
+ 				</div>
+ 				<div class="barra">B<input class="barraDentro" id="lcolorBbarra" type="range" name="lcolorBbarra" min="0" max="255" step="1" value="0">
+ 				<input class="cajabarra" type="text" name="lcolorBbox" id="lcolorBbox" value="0">
+ 				</div>
+ 				<div class="actnBtn2" data-action="">Posicion</div>
+ 				<div class="barra">x<input class="barraDentro" id="lposXbarra" type="range" name="lposXbarra" min="-10" max="10" step="1" value="1"><input class="cajabarra" type="text" name="lposXbox" id="lposXbox" value="1"></div>
+ 				<div class="barra">y<input class="barraDentro" id="lposYbarra" type="range" name="lposYbarra" min="-10" max="10" step="1" value="1"><input class="cajabarra" type="text" name="lposYbox" id="lposYbox" value="1"></div>
+ 				<div class="barra">z<input class="barraDentro" id="lposZbarra" type="range" name="lposZbarra" min="-10" max="10" step="1" value="1"><input class="cajabarra" type="text" name="lposZbox" id="lposZbox" value="1"></div>
+
+ 				</div>
+ 				
+ 			</div>
+ 		</div>
+
+ 	</div>
+
+ 	<script src="./js/render.js"></script>
+ 	<script src="./js/sidemenu.js"></script>
+ </body>
+ </html>
